@@ -1,6 +1,4 @@
-import type { OnValidateHandler } from '@devvit/public-api';
-
-type BonusTable = Record<string, Record<string, number>>;
+type BonusTable = Record<string, Record<string, number | "info">>;
 
 export function escapeRegExp(str: string) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
