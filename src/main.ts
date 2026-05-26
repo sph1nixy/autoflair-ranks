@@ -6,7 +6,6 @@ import {
   sleep,
   getRandomDelay,
   removeOldFromFlair,
-  getCurrRank,
   getBonusPoints
 } from './utils/functions.js';
 
@@ -160,9 +159,10 @@ Devvit.addTrigger({
       } catch (e) {
         return;
       }
-      const response = await subredditId.getUserFlair({ usernames: [user] });
-      const userFlairText = response.users[0].flairText ?? '';
-      let currentRank = getCurrRank(ranks, userFlairText);
+      let totalKarma = parseInt(await context.redis.get(`${event.author.id}-karma`) ?? 0, 10);
+      let extra = parseInt(await context.redis.get(`${event.author.id}-extra`) ?? '0', 10);
+      totalKarma += extra;
+      let currentRank = getRank(ranks, totalKarma);
       const useroObj = await context.reddit.getUserByUsername(user);
       let permissions = [];
       if (useroObj) {
