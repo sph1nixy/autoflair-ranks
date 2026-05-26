@@ -159,7 +159,7 @@ Devvit.addTrigger({
       } catch (e) {
         return;
       }
-      let totalKarma = parseInt(await context.redis.get(`${event.author.id}-karma`) ?? 0, 10);
+      let totalKarma = parseInt(await context.redis.get(`${event.author.id}-karma`) ?? '0', 10);
       let extra = parseInt(await context.redis.get(`${event.author.id}-extra`) ?? '0', 10);
       totalKarma += extra;
       let currentRank = getRank(ranks, totalKarma);
