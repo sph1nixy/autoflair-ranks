@@ -50,22 +50,6 @@ export function getRandomDelay(minSeconds: number, maxSeconds: number): number {
   return Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
 }
 
-export function getCurrRank(ranksList: { [key: string]: number }, userFlairText: string) {
-  let lowestRank = null;
-  let lowestValue = Infinity;
-
-  for (const [rankName, rankValue] of Object.entries(ranksList)) {
-    if (userFlairText.includes(rankName)) {
-      if (rankValue < lowestValue) {
-        lowestValue = rankValue;
-        lowestRank = rankName;
-      }
-    }
-  }
-
-  return lowestRank;
-}
-
 export function getBonusPoints(
   bonus: BonusTable,
   currentRank: string,
